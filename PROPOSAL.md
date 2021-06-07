@@ -1,5 +1,5 @@
 ## atmMachine
-#Description and Motivation
+# Description and Motivation
 The User will be able to make multiple accounts by signing up. Login and logout of those accounts. Make a Deposit/Withdraw when the user is logged in. Update their own pin and even delete their own accounts.
 
 ## Milestone 1  1 day
