@@ -16,7 +16,7 @@ I will get the landing page to diplay the users data, set up a database, and Add
 
 ## Milestone 3 
 ### 1-2 days
-Allow user to be able to signup, login, logout, change pin number and delete account in an html form. Make a database table for the users information.
+Creating a signup page, login page, logout page, change pin number page and delete account page in an html form. Make a database table for the users information.
 
 ## Milestone 4 
 ### Remaining Days
