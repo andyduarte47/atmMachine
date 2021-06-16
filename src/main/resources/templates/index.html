@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,9 +9,9 @@
 
 <body>
 <ul>
-
-    <li><a href="#login">Login</a></li>
-    <li><a href="#signup">Sign Up</a></li>
+    <li><a th:href="@{/UserInformation}">List of Users</a></li>
+    <li><a th:href="@{/register}">Register</a></li>
+    <li><a th:href="@{/login}">Login</a></li>
     <li id="name"><a href="#">Andy's ATM</a></li>
 
 </ul>

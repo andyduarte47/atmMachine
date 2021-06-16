@@ -20,7 +20,8 @@ li {
   float: right;
 }
 #name{
-  margin-right: 930px;
+  margin-right: 630px;
+  float: left;
 }
 
 li a {
