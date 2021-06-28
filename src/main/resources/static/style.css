@@ -114,6 +114,23 @@ div.description{
     top: 50px;
     text-shadow: 0.5px -1px 1px black;
 }
+.floated{
+    position:relative;
+    left:80px;
+}
+
+.floated2{
+    position:relative;
+    top: -33px;
+    left:515px;
+
+
+}
+.floated3{
+    position:relative;
+    top: -66px;
+    left:940px;
+}
 
 
 

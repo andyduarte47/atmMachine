@@ -1,11 +1,11 @@
 package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import  org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import javax.persistence.*;
+import org.springframework.web.bind.annotation.*;
+
+
 import org.springframework.ui.Model;
 
 import java.util.List;
@@ -20,16 +20,19 @@ public class Main {
      public String main(){
          return "index";
      }
+
      @Autowired
      private UserRepository userRepo;
+    @Autowired
+    private CustomUserDetailsService service;
 
-    @GetMapping("/listPage")
-    public String listPage(Model model) {
-        List<User> listUsers = (List<User>) userRepo.findAll();
-        model.addAttribute("listUsers", listUsers);
-
-        return "listPage";
-    }
+//    @GetMapping("/listPage")
+//    public String listPage(Model model) {
+//        List<User> listUsers = (List<User>) userRepo.findAll();
+//        model.addAttribute("listUsers", listUsers);
+//
+//        return "listPage";
+//    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -48,10 +51,86 @@ public class Main {
         return "register_success";
     }
     @GetMapping("/users")
-    public String listUsers(Model model) {
+    public String listUsers(Model model, @AuthenticationPrincipal CustomUserDetails detail) {
         List<User> listUsers = userRepo.findAll();
+        listUsers.removeIf(user -> user.getId() != detail.getId());
         model.addAttribute("listUsers", listUsers);
 
         return "users";
+    }
+
+    @RequestMapping(value = "/redirect", method = RequestMethod.GET)
+    public String redirect() {
+
+        return "redirect:depositPage";
+    }
+
+    @GetMapping("/depositPage")
+    public String finalPage(Model model,@AuthenticationPrincipal CustomUserDetails detail) {
+        model.addAttribute("userID",detail.getUsername());
+        User user = userRepo.findUserByUserID(detail.getUsername());
+        model.addAttribute("user", user);
+        return "deposit";
+    }
+
+    @RequestMapping(value = "/redirect2", method = RequestMethod.GET)
+    public String redirect2() {
+
+        return "redirect2:withdrawPage";
+    }
+
+    @RequestMapping(value = "/withdrawPage", method = RequestMethod.GET)
+    public String withdrawPage(Model model,@AuthenticationPrincipal CustomUserDetails detail) {
+        model.addAttribute("userID",detail.getUsername());
+        User user = userRepo.findUserByUserID(detail.getUsername());
+        model.addAttribute("user", user);
+        return "withdraw";
+    }
+
+    @RequestMapping(value = "/redirect3", method = RequestMethod.GET)
+    public String redirect3() {
+
+        return "redirect3:listPage";
+    }
+
+    @RequestMapping(value = "/listPage", method = RequestMethod.GET)
+    public String listPage(Model model) {
+        List<User> listUsers = (List<User>) userRepo.findAll();
+        model.addAttribute("listUsers", listUsers);
+
+        return "listPage";
+    }
+
+    @RequestMapping(value = "/redirect4", method = RequestMethod.GET)
+    public String redirect4() {
+
+        return "redirect4:detailPage";
+    }
+
+    @RequestMapping(value = "/detailPage", method = RequestMethod.GET)
+    public String detailPage(Model model) {
+        List<User> listUsers = (List<User>) userRepo.findAll();
+        model.addAttribute("listUsers", listUsers);
+
+        return "detailPage";
+    }
+
+    @RequestMapping(value="/process_transfer/{userID}", method= RequestMethod.POST)
+    public String addingDeposit(@PathVariable("userID") String userID, @ModelAttribute("user") User user) {
+        System.out.println(userID);
+        int balance = user.getBalance();
+        System.out.println(balance);
+        service.addDepositToUserAccount(userID, balance);
+
+        return "transfer_success";
+    }
+    @RequestMapping(value="/process_withdraw/{userID}", method= RequestMethod.POST)
+    public String subtractDeposit(@PathVariable("userID") String userID, @ModelAttribute("user") User user) {
+        System.out.println(userID);
+        int balance = user.getBalance();
+        System.out.println(balance);
+        service.subtractDepositToUserAccount(userID, balance);
+
+        return "transfer_success";
     }
 }

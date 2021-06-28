@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+
 <head>
   <meta charset="ISO-8859-1">
   <title>List Users</title>
+  <link rel="stylesheet" th:href="@{/style.css}"/>
   <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+
   <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
@@ -18,8 +21,19 @@
     </form>
   </div>
   <div>
-    <h1>List of Users</h1>
   </div>
+  <div>&nbsp;</div>
+  <div>
+    <form th:action="@{/users}">
+      Filter:
+      <input type="text" name="username" required/>
+      &nbsp;
+      <input type="submit" value ="Search" />
+      &nbsp;
+      <input type="button" value="Clear"/>
+    </form>
+  </div>
+  <div>&nbsp;</div>
 
   <div>
     <table class="table table-striped table-bordered">
@@ -28,6 +42,7 @@
         <th>User ID</th>
         <th>First Name</th>
         <th>Last Name</th>
+        <th>Balance</th>
       </tr>
       </thead>
       <tbody>
@@ -35,9 +50,46 @@
         <td th:text="${UserInformation.userID}">UserID</td>
         <td th:text="${UserInformation.firstName}">First Name</td>
         <td th:text="${UserInformation.lastName}">Last Name</td>
+        <td th:text="${UserInformation.balance}">Balance</td>
       </tr>
       </tbody>
     </table>
+    <form class="floated" method = "get" action = "/depositPage">
+      <table>
+        <tr>
+          <td>
+            <input type = "submit" value = "Deposit"/>
+          </td>
+        </tr>
+      </table>
+    </form>
+    <form class="floated2" method = "get" action = "/withdrawPage">
+      <table>
+        <tr>
+          <td>
+            <input type = "submit" value = "Withdraw"/>
+          </td>
+        </tr>
+      </table>
+    </form>
+<!--    <form class="floated" method = "get" action = "/listPage">-->
+<!--      <table>-->
+<!--        <tr>-->
+<!--          <td>-->
+<!--            <input type = "submit" value = "list users"/>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--      </table>-->
+<!--    </form>-->
+    <form class="floated3" method = "get" action = "/detailPage">
+      <table>
+        <tr>
+          <td>
+            <input type = "submit" value = "List Users"/>
+          </td>
+        </tr>
+      </table>
+    </form>
   </div>
 </div>
 </body>

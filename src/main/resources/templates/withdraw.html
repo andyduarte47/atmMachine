@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta charset="ISO-8859-1">
+  <title>List Users</title>
+  <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+  <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+  <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h2>Withdraw Page</h2>
+<form th:action="@{/process_withdraw/{userID}(userID=${userID})}"
+      method="post" style="max-width: 600px; margin: 0 auto;" th:object="${user}">
+  <div class="m-3">
+    <div class="form-group row">
+      <label class="col-4 col-form-label">Withdraw Amount: </label>
+      <div class="col-8">
+        <input id="saveDepositAmount" type="number" th:field="*{balance}" class="form-control"/>
+      </div>
+      <button type="submit" id="saveDepositSubmit">save withdraw</button>
+    </div>
+  </div>
+</form>
+</body>
+</html>

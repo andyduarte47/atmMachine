@@ -7,7 +7,7 @@ import javax.persistence.*;
     @Table(name = "UserInformation")
     public class User {
 
-        public Long getId() {
+        public long getId() {
             return id;
         }
 
@@ -24,11 +24,11 @@ import javax.persistence.*;
         }
 
         public String getPassword() {
-            return Password;
+            return password;
         }
 
-        public void setPassword(String Password) {
-            this.Password = Password;
+        public void setPassword(String password) {
+            this.password = password;
         }
 
         public String getFirstName() {
@@ -47,21 +47,31 @@ import javax.persistence.*;
             this.lastName = lastName;
         }
 
+        public int getBalance(){
+            return balance;
+        }
+        public void setBalance(int balance){
+            this.balance = balance;
+        }
+
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+        private long id;
 
         @Column(nullable = false, unique = true, length = 45)
         private String userID;
 
         @Column(nullable = false, length = 64)
-        private String Password;
+        private String password;
 
         @Column(name = "first_name", nullable = false, length = 20)
         private String firstName;
 
         @Column(name = "last_name", nullable = false, length = 20)
         private String lastName;
+
+        @Column(nullable = false,length = 64)
+        private int balance;
 
         // getters and setters are not shown
     }

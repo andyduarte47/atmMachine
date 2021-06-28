@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>List Users</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/savDeposit.js}" defer></script>
+</head>
+<title>Spring Page Redirection</title>
+
+<body>
+<h2>Deposit Page</h2>
+<form th:action="@{/process_transfer/{userID}(userID=${userID})}"
+     method="post" style="max-width: 600px; margin: 0 auto;" th:object="${user}">
+    <div class="m-3">
+        <div class="form-group row">
+            <label class="col-4 col-form-label">Deposit Amount: </label>
+            <div class="col-8">
+                <input id="saveDepositAmount" type="number" th:field="*{balance}" class="form-control"/>
+            </div>
+            <button type="submit" id="saveDepositSubmit">save deposit</button>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

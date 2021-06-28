@@ -2,7 +2,6 @@ package com.example.demo;
 
 import java.util.Collection;
 
-import com.example.demo.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,6 +28,8 @@ class CustomUserDetails implements UserDetails {
         return user.getUserID();
     }
 
+    public int getBalance() { return user.getBalance();}
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -47,6 +48,10 @@ class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public long getId(){
+        return user.getId();
     }
 
     public String getFullName() {
