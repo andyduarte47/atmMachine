@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.ui.Model;
 
+import java.text.AttributedString;
 import java.util.List;
+import java.util.function.Predicate;
 
 
 @Controller
 
 public class Main {
+
 
 
     @GetMapping("")
@@ -26,13 +29,6 @@ public class Main {
     @Autowired
     private CustomUserDetailsService service;
 
-//    @GetMapping("/listPage")
-//    public String listPage(Model model) {
-//        List<User> listUsers = (List<User>) userRepo.findAll();
-//        model.addAttribute("listUsers", listUsers);
-//
-//        return "listPage";
-//    }
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -116,21 +112,34 @@ public class Main {
     }
 
     @RequestMapping(value="/process_transfer/{userID}", method= RequestMethod.POST)
-    public String addingDeposit(@PathVariable("userID") String userID, @ModelAttribute("user") User user) {
-        System.out.println(userID);
+    public String addingDeposit(@PathVariable("userID") String userID, @ModelAttribute("user") User user, Model model,@AuthenticationPrincipal CustomUserDetails detail) {
         int balance = user.getBalance();
-        System.out.println(balance);
         service.addDepositToUserAccount(userID, balance);
-
+        List<User> listUsers = userRepo.findAll();
+        listUsers.removeIf(new Predicate<User>() {
+            @Override
+            public boolean test(User user) {
+                return user.getId() != detail.getId();
+            }
+        });
+        model.addAttribute("listUsers", listUsers);
         return "transfer_success";
     }
     @RequestMapping(value="/process_withdraw/{userID}", method= RequestMethod.POST)
-    public String subtractDeposit(@PathVariable("userID") String userID, @ModelAttribute("user") User user) {
-        System.out.println(userID);
+    public String subtractDeposit(@PathVariable("userID") String userID, @ModelAttribute("user") User user,Model model,@AuthenticationPrincipal CustomUserDetails detail) {
         int balance = user.getBalance();
-        System.out.println(balance);
         service.subtractDepositToUserAccount(userID, balance);
-
-        return "transfer_success";
+        List<User> listUsers = userRepo.findAll();
+        listUsers.removeIf(new Predicate<User>() {
+            @Override
+            public boolean test(User user) {
+                return user.getId() != detail.getId();
+            }
+        });
+        model.addAttribute("listUsers", listUsers);
+        return "transfer2_success";
     }
+
+
+
 }

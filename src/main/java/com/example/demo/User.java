@@ -1,12 +1,9 @@
 package com.example.demo;
 import javax.persistence.*;
 
-
-
     @Entity
-    @Table(name = "UserInformation")
-    public class User {
-
+    @Table(name="UserInformation")
+    public class User{
         public long getId() {
             return id;
         }
@@ -14,23 +11,6 @@ import javax.persistence.*;
         public void setId(Long id) {
             this.id = id;
         }
-
-        public String getUserID() {
-            return userID;
-        }
-
-        public void setUserID(String userID) {
-            this.userID = userID;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
         public String getFirstName() {
             return firstName;
         }
@@ -47,22 +27,9 @@ import javax.persistence.*;
             this.lastName = lastName;
         }
 
-        public int getBalance(){
-            return balance;
-        }
-        public void setBalance(int balance){
-            this.balance = balance;
-        }
-
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long id;
-
-        @Column(nullable = false, unique = true, length = 45)
-        private String userID;
-
-        @Column(nullable = false, length = 64)
-        private String password;
 
         @Column(name = "first_name", nullable = false, length = 20)
         private String firstName;
@@ -70,8 +37,38 @@ import javax.persistence.*;
         @Column(name = "last_name", nullable = false, length = 20)
         private String lastName;
 
-        @Column(nullable = false,length = 64)
+        public int getBalance() {
+            return balance;
+        }
+
+        public void setBalance(int balance) {
+            this.balance = balance;
+        }
+
+        @Column(name = "balance",nullable = false,length = 64)
         private int balance;
 
-        // getters and setters are not shown
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+
+        @Column(name = "password",nullable = false, length = 64)
+        private String password;
+
+
+        public String getUserid() {
+            return userID;
+        }
+
+        public void setUserid(String userID) {
+            this.userID = userID;
+        }
+
+        @Column(name = "userID",nullable = false, unique = true, length = 45)
+        private String userID;
+
     }

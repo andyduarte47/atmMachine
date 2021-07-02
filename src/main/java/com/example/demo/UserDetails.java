@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 class CustomUserDetails implements UserDetails {
 
     private User user;
+//    private Transaction transaction;
 
     public CustomUserDetails(User user) {
         this.user = user;
@@ -23,9 +24,10 @@ class CustomUserDetails implements UserDetails {
         return user.getPassword();
     }
 
+
     @Override
     public String getUsername() {
-        return user.getUserID();
+        return user.getUserid();
     }
 
     public int getBalance() { return user.getBalance();}
@@ -57,5 +59,6 @@ class CustomUserDetails implements UserDetails {
     public String getFullName() {
         return user.getFirstName() + " " + user.getLastName();
     }
+
 
 }

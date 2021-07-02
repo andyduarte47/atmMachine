@@ -23,16 +23,7 @@
   <div>
   </div>
   <div>&nbsp;</div>
-  <div>
-    <form th:action="@{/users}">
-      Filter:
-      <input type="text" name="username" required/>
-      &nbsp;
-      <input type="submit" value ="Search" />
-      &nbsp;
-      <input type="button" value="Clear"/>
-    </form>
-  </div>
+
   <div>&nbsp;</div>
 
   <div>
@@ -47,7 +38,7 @@
       </thead>
       <tbody>
       <tr th:each="UserInformation: ${listUsers}">
-        <td th:text="${UserInformation.userID}">UserID</td>
+        <td th:text="${UserInformation.userid}">UserID</td>
         <td th:text="${UserInformation.firstName}">First Name</td>
         <td th:text="${UserInformation.lastName}">Last Name</td>
         <td th:text="${UserInformation.balance}">Balance</td>
