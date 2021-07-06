@@ -11,6 +11,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     public User findAll(String userID);
 
     User findUserByUserID(String userID);
+
+    Transaction findById(long id);
 }
 
 

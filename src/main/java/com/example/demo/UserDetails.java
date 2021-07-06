@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 class CustomUserDetails implements UserDetails {
 
     private User user;
-//    private Transaction transaction;
+    private Transaction transaction;
 
     public CustomUserDetails(User user) {
         this.user = user;

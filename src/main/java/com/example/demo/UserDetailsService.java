@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 class CustomUserDetailsService implements UserDetailsService {
 
@@ -43,11 +45,11 @@ class CustomUserDetailsService implements UserDetailsService {
         oldUser.setBalance(oldUser.getBalance() - balance);
         userRepo.save(oldUser);
     }
+    public void addTransactionToUserAccount(long id, int amount){
+        Transaction oldUser = userRepo.findById(id);
+        oldUser.setAmount(oldUser.getAmount() + amount);
+        userRepo.save(oldUser.getUser());
+    }
 
-//    public void addTransfer(String userID, int transaction){
-//        Transaction userTransaction = userRepo.findbyID(userID);
-//        userTransaction.setTransaction((userTransaction.getTransaction() + transaction));
-//        userRepo.save(userTransaction);
-//
-//    }
+
 }
