@@ -32,6 +32,10 @@ class CustomUserDetails implements UserDetails {
 
     public int getBalance() { return user.getBalance();}
 
+    public int getAmount(){
+        return transaction.getAmount();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

@@ -116,7 +116,6 @@ public class Main {
         int balance = user.getBalance();
         service.addDepositToUserAccount(userID, balance);
         List<User> listUsers = userRepo.findAll();
-        System.out.println(balance);
         listUsers.removeIf(new Predicate<User>() {
             @Override
             public boolean test(User user) {
@@ -139,13 +138,6 @@ public class Main {
         });
         model.addAttribute("listUsers", listUsers);
         return "transfer2_success";
-    }
-    @RequestMapping(value="/process_transfer/{userID}")
-    public String addingTransaction(@PathVariable("userID") long userID,Transaction transaction) {
-        int transactionAmount = transaction.getAmount();
-        service.addTransactionToUserAccount(userID, transactionAmount);
-        System.out.println(transactionAmount);
-        return "transfer_success";
     }
 
 }

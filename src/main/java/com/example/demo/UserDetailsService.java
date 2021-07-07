@@ -6,13 +6,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private TransactionRepository transactionRepo;
 
 
     @Override
@@ -34,6 +35,7 @@ class CustomUserDetailsService implements UserDetailsService {
         User oldUser = userRepo.findUserByUserID(userID);
         oldUser.setBalance(oldUser.getBalance() + balance);
         userRepo.save(oldUser);
+        addTransactionToUserAccount(oldUser, balance, "deposit");
     }
 
     public void subtractDepositToUserAccount(String userID, int balance) {
@@ -44,11 +46,15 @@ class CustomUserDetailsService implements UserDetailsService {
         }
         oldUser.setBalance(oldUser.getBalance() - balance);
         userRepo.save(oldUser);
+        addTransactionToUserAccount(oldUser, balance, "withdrawal");
     }
-    public void addTransactionToUserAccount(long id, int amount){
-        Transaction oldUser = userRepo.findById(id);
-        oldUser.setAmount(oldUser.getAmount() + amount);
-        userRepo.save(oldUser.getUser());
+    private void addTransactionToUserAccount(User user, int amount, String type){
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amount);
+        transaction.setTransactionType(type);
+        transaction.setTimestamp(new java.util.Date().toString());
+        transaction.setUser(user);
+        transactionRepo.save(transaction);
     }
 
 
