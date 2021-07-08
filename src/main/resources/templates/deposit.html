@@ -4,6 +4,7 @@
 <head>
     <meta charset="ISO-8859-1">
     <title>List Users</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
@@ -11,7 +12,7 @@
 </head>
 <title>Spring Page Redirection</title>
 
-<body>
+<body id="body2">
 <h2>Deposit Page</h2>
 <form th:action="@{/process_transfer/{userID}(userID=${userID})}"
      method="post" style="max-width: 600px; margin: 0 auto;" th:object="${user}">

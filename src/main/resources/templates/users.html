@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:form="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="ISO-8859-1">
@@ -10,24 +10,22 @@
   <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
   <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body id="body2">
+<ul>
+  <li><a th:href="@{/logout}">Logout</a></li>
+  <li id="name"><a href="">Andy's ATM</a></li>
+
+</ul>
 <div class="container text-center">
   <div>
     <form th:action="@{/logout}" method="post">
       <p>
         Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
       </p>
-      <input type="submit" value="Sign Out" />
     </form>
   </div>
   <div>
-  </div>
-  <div>&nbsp;</div>
-
-  <div>&nbsp;</div>
-
-  <div>
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered" id="boxOfUser">
       <thead class="thead-dark">
       <tr>
         <th>User ID</th>
@@ -38,10 +36,10 @@
       </thead>
       <tbody>
       <tr th:each="UserInformation: ${listUsers}">
-        <td th:text="${UserInformation.userid}">UserID</td>
-        <td th:text="${UserInformation.firstName}">First Name</td>
-        <td th:text="${UserInformation.lastName}">Last Name</td>
-        <td th:text="${UserInformation.balance}">Balance</td>
+        <td th:text="${UserInformation.userid}" class="space">UserID</td>
+        <td th:text="${UserInformation.firstName}" class="space">First Name</td>
+        <td th:text="${UserInformation.lastName}"class="space">Last Name</td>
+        <td th:text="${UserInformation.balance}"class="space">Balance</td>
       </tr>
       </tbody>
     </table>
@@ -49,7 +47,7 @@
       <table>
         <tr>
           <td>
-            <input type = "submit" value = "Deposit"/>
+            <input type = "submit" value = "Deposit" id="btn1"/>
           </td>
         </tr>
       </table>
@@ -58,25 +56,16 @@
       <table>
         <tr>
           <td>
-            <input type = "submit" value = "Withdraw"/>
+            <input type = "submit" value = "Withdraw" id="btn2"/>
           </td>
         </tr>
       </table>
     </form>
-<!--    <form class="floated" method = "get" action = "/listPage">-->
-<!--      <table>-->
-<!--        <tr>-->
-<!--          <td>-->
-<!--            <input type = "submit" value = "list users"/>-->
-<!--          </td>-->
-<!--        </tr>-->
-<!--      </table>-->
-<!--    </form>-->
     <form class="floated3" method = "get" action = "/detailPage">
       <table>
         <tr>
           <td>
-            <input type = "submit" value = "List Users"/>
+            <input type = "submit" value = "List Users" id="btn3"/>
           </td>
         </tr>
       </table>

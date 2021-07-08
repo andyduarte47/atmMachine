@@ -45,7 +45,7 @@ import javax.persistence.*;
             this.balance = balance;
         }
 
-        @Column(name = "balance",nullable = false,length = 64)
+        @Column(name = "balance",nullable = false,length = 1000000000)
         private int balance;
 
         public String getPassword() {
